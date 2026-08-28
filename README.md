@@ -2,9 +2,11 @@
 
 CloudDock deploys an existing Docker image to AWS ECS Fargate behind an internet-facing HTTP Application Load Balancer (ALB). It does not build the image or assume a particular application language.
 
-## Architecture and request flow
 
-![CloudDock AWS ECS architecture](architecture.png)
+[![Validate Terraform](https://github.com/DGclasher/cloud-dock/actions/workflows/validate-terraform.yml/badge.svg)](https://github.com/DGclasher/cloud-dock/actions/workflows/validate-terraform.yml)
+
+
+## Architecture and request flow
 
 Each selected AWS region receives an independent copy of the stack:
 
