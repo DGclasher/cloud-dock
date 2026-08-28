@@ -4,6 +4,8 @@ CloudDock deploys an existing Docker image to AWS ECS Fargate behind an internet
 
 ## Architecture and request flow
 
+![CloudDock AWS ECS architecture](architecture.png)
+
 Each selected AWS region receives an independent copy of the stack:
 
 ```text
