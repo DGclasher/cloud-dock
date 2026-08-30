@@ -1,3 +1,3 @@
 provider "aws" {
-  region = tolist(var.regions)[0]
+  region = local.deployment_region
 }

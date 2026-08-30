@@ -1,16 +1,2 @@
-regions = [
-  "us-east-1",
-  "us-west-1",
-]
-
-app_name       = "my-app"
-docker_image   = "my-registry/my-app:latest"
-container_port = 8080
-cpu            = 256
-memory         = 512
-desired_count  = 2
-
-environment_variables = {
-  ENVIRONMENT = "production"
-  LOG_LEVEL   = "INFO"
-}
+database_username = "cloudockadmin"
+database_password = "ChangeMe123!"

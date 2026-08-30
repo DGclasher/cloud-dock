@@ -64,3 +64,17 @@ variable "environment_variables" {
   type        = map(string)
   default     = {}
 }
+
+variable "database_username" {
+  description = "Master username for the RDS instance. This is kept separate from clouddock.yaml."
+  type        = string
+  default     = "cloudockadmin"
+  sensitive   = true
+}
+
+variable "database_password" {
+  description = "Master password for the RDS instance. This is kept separate from clouddock.yaml."
+  type        = string
+  default     = "ChangeMe123!"
+  sensitive   = true
+}
