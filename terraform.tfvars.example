@@ -1,2 +1,21 @@
-database_username = "cloudockadmin"
-database_password = "ChangeMe123!"
+regions = ["us-east-1"]
+
+app_name       = "whoisdg"
+docker_image   = "dgclasher/whoisdg:latest"
+container_port = 5000
+cpu            = 256
+memory         = 512
+desired_count  = 1
+
+environment_variables = {
+  RESUME_URL = "https://example.com/resume"
+  LOG_LEVEL  = "INFO"
+}
+
+database_enabled = true
+database_type    = "postgres"
+database_username = "exampleuser"
+database_password = "example-password-123"
+
+cache_enabled = false
+cache_type    = "redis"

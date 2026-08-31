@@ -1,10 +1,10 @@
 locals {
-  clouddock = yamldecode(file("${path.root}/clouddock.yaml"))
+  clouddock = merge({}, try(yamldecode(file("${path.root}/clouddock.yaml")), {}))
 
   app_config        = try(local.clouddock.application, {})
   compute_config    = try(local.clouddock.compute, {})
-  database_config   = try(local.clouddock.database, { enabled = false, type = "postgres" })
-  cache_config      = try(local.clouddock.cache, { enabled = false, type = "redis" })
+  database_config   = try(local.clouddock.database, {})
+  cache_config      = try(local.clouddock.cache, {})
   env_config        = try(local.clouddock.environment_variables, {})
   deployment_region = try(local.clouddock.regions[0], tolist(var.regions)[0])
 
@@ -15,11 +15,15 @@ locals {
   memory         = try(local.compute_config.memory, var.memory)
   desired_count  = try(local.compute_config.desired_count, var.desired_count)
 
-  compute_type     = lower(try(local.compute_config.type, "ecs"))
-  database_enabled = try(local.database_config.enabled, false)
-  database_type    = lower(try(local.database_config.type, "postgres"))
-  cache_enabled    = try(local.cache_config.enabled, false)
-  cache_type       = lower(try(local.cache_config.type, "redis"))
+  compute_type = lower(try(local.compute_config.type, "ecs"))
+
+  database_enabled  = try(local.database_config.enabled, var.database_enabled)
+  database_type     = lower(try(local.database_config.type, var.database_type))
+  database_username = try(local.database_config.username, var.database_username)
+  database_password = try(local.database_config.password, var.database_password)
+
+  cache_enabled = try(local.cache_config.enabled, var.cache_enabled)
+  cache_type    = lower(try(local.cache_config.type, var.cache_type))
 
   generated_database_env = local.database_enabled ? {
     DB_HOST     = module.database[0].host

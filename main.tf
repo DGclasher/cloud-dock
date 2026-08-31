@@ -19,8 +19,8 @@ module "database" {
   subnet_ids            = module.app.private_subnet_ids
   ecs_security_group_id = module.app.ecs_security_group_id
   database_type         = local.database_type
-  username              = var.database_username
-  password              = var.database_password
+  username              = local.database_username
+  password              = local.database_password
 }
 
 module "cache" {

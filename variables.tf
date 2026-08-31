@@ -65,16 +65,50 @@ variable "environment_variables" {
   default     = {}
 }
 
-variable "database_username" {
-  description = "Master username for the RDS instance. This is kept separate from clouddock.yaml."
+variable "database_enabled" {
+  description = "Whether to create an RDS database. This can also be set in clouddock.yaml."
+  type        = bool
+  default     = false
+}
+
+variable "database_type" {
+  description = "Database engine type. Supported values are postgres and mysql."
   type        = string
-  default     = "cloudockadmin"
+  default     = "postgres"
+
+  validation {
+    condition     = contains(["postgres", "mysql"], lower(var.database_type))
+    error_message = "database_type must be one of: postgres, mysql."
+  }
+}
+
+variable "database_username" {
+  description = "Master username for the RDS instance. This is read from clouddock.yaml when present."
+  type        = string
+  default     = "exampleuser"
   sensitive   = true
 }
 
 variable "database_password" {
-  description = "Master password for the RDS instance. This is kept separate from clouddock.yaml."
+  description = "Master password for the RDS instance. This is read from clouddock.yaml when present."
   type        = string
-  default     = "ChangeMe123!"
+  default     = "example-password-123"
   sensitive   = true
+}
+
+variable "cache_enabled" {
+  description = "Whether to create ElastiCache. This can also be set in clouddock.yaml."
+  type        = bool
+  default     = false
+}
+
+variable "cache_type" {
+  description = "Cache engine type. Supported values are redis and memcached."
+  type        = string
+  default     = "redis"
+
+  validation {
+    condition     = contains(["redis", "memcached"], lower(var.cache_type))
+    error_message = "cache_type must be one of: redis, memcached."
+  }
 }
