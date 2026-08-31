@@ -1,3 +1,4 @@
 .terraform
+clouddock.yaml
 terraform.tfvars
 *terraform.tfstate*
